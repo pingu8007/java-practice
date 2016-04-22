@@ -4,7 +4,7 @@ public class hw042104 {
 
 	public static void main(String[] args) {
 
-		int level = 10, repeat_h = 1, repeat_v = 9;
+		int level = 3, repeat_h = 1, repeat_v = 1;
 		boolean top = false, button = true, left = true, right = true;
 
 		// vertically repeat
