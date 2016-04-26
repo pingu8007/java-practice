@@ -1,8 +1,14 @@
 package moe.pingu.iii.lab;
 
+import moe.pingu.iii.shared.gen.TimesTable;
+
 public class lab042101 {
 
 	public static void main(String[] args) {
+		v1();
+	}
+
+	public static void v1() {
 		// TODO Auto-generated method stub
 		int iMax = 128, jMax = 9, aMax;
 		aMax = iMax * jMax;
@@ -13,13 +19,13 @@ public class lab042101 {
 			while (j <= jMax) {
 
 				// Padding
-				for (int hold = i; hold < Math.pow(10, (int)(Math.log10(iMax))); hold = hold * 10) {
+				for (int hold = i; hold < Math.pow(10, (int) (Math.log10(iMax))); hold = hold * 10) {
 					System.out.print(" ");
 				}
 				System.out.print(i + "x");
 
 				// Padding
-				for (int hold = j; hold < Math.pow(10, (int)(Math.log10(jMax))); hold = hold * 10) {
+				for (int hold = j; hold < Math.pow(10, (int) (Math.log10(jMax))); hold = hold * 10) {
 					System.out.print(" ");
 				}
 				System.out.print(j + "=");
@@ -27,7 +33,7 @@ public class lab042101 {
 				int ans = i * j;
 
 				// Padding
-				for (int hold = ans; hold < Math.pow(10, (int)(Math.log10(aMax))); hold = hold * 10) {
+				for (int hold = ans; hold < Math.pow(10, (int) (Math.log10(aMax))); hold = hold * 10) {
 					System.out.print(" ");
 				}
 				System.out.print(ans + "\t");
@@ -37,6 +43,13 @@ public class lab042101 {
 			System.out.print("\n");
 			i++;
 		}
+	}
+
+	public static void v2() {
+		int iMax = 128, jMax = 9;
+		TimesTable obj = new TimesTable();
+		obj.setSize(jMax, iMax);
+		obj.fillAll();
 	}
 
 }
