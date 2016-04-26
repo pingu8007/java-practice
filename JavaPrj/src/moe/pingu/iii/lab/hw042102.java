@@ -1,6 +1,6 @@
 package moe.pingu.iii.lab;
 
-import moe.pingu.iii.shared.shape.triangle;
+import moe.pingu.iii.shared.gen.Triangle;
 
 public class hw042102 {
 
@@ -14,7 +14,7 @@ public class hw042102 {
 	// }
 
 	public static void main(String[] args) {
-		triangle obj = new triangle();
+		Triangle obj = new Triangle();
 		obj.high = 10;
 		obj.flip_v = true;
 		// obj.setAlt(true, true, '.');

@@ -1,6 +1,6 @@
 package moe.pingu.iii.lab;
 
-import moe.pingu.iii.shared.shape.triangle;
+import moe.pingu.iii.shared.gen.Triangle;
 
 public class hw042104 {
 
@@ -10,12 +10,12 @@ public class hw042104 {
 		int repeat_h = 8, repeat_v = 20;
 		// int repeat_h = 1, repeat_v = 1;
 
-		triangle objA = new triangle(); // left part
+		Triangle objA = new Triangle(); // left part
 		objA.high = high;
 		objA.over_h = false;
 		objA.setAlt(true, true, '.');
 
-		triangle objB = new triangle(); // right part
+		Triangle objB = new Triangle(); // right part
 		objB.high = high;
 		objB.over_h = true;
 		objB.setAlt(true, false, '.');

@@ -1,4 +1,4 @@
-package moe.pingu.iii.shared.shape;
+package moe.pingu.iii.shared.gen;
 
 /**
  * Generate triangle and print out. First used in Homework 1 and 2.
@@ -7,7 +7,7 @@ package moe.pingu.iii.shared.shape;
  * @author PinGu
  *
  */
-public class triangle {
+public class Triangle {
 
 	// Declaration
 	/**
@@ -44,7 +44,7 @@ public class triangle {
 	/**
 	 * Triangle for space-padding.
 	 */
-	protected triangle fill = null;
+	protected Triangle fill = null;
 
 	/**
 	 * Padding or not.
@@ -70,7 +70,7 @@ public class triangle {
 		alt = fillAuto;
 		flip_h = fillBefore;
 		if (fillAuto) {
-			fill = new triangle();
+			fill = new Triangle();
 			fill.symbol = fillSymbol;
 			fill.flip_v = !this.flip_v;
 			fill.over_h = !this.over_h;
