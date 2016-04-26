@@ -8,7 +8,7 @@ public class lab042101 {
 		// TODO Auto-generated method stub
 		int iMax = 128, jMax = 9;
 		TimesTable obj = new TimesTable();
-		obj.setSize(jMax, iMax);
+		obj.setSize(iMax, jMax);
 		obj.fillAll();
 	}
 }
