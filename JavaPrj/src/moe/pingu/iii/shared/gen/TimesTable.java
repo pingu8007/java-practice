@@ -1,9 +1,16 @@
 package moe.pingu.iii.shared.gen;
 
+/**
+ * Generate TimesTable and print out. First used in Lab 20160421-1.
+ * 
+ * @version 1.0.2016.04.26
+ * @author PinGu
+ *
+ */
 public class TimesTable {
 
-	// private char padChar = ' ';
-	// private boolean padding = true;
+	private char padChar = ' ';
+	private boolean padding = false;
 
 	private int size_x = 1;
 	private int size_y = 1;
@@ -19,28 +26,94 @@ public class TimesTable {
 
 	/**
 	 * Setting the size of Times Table.
-	 * 
-	 * @param size_v
-	 *            Vertical size of the Times Table.
-	 * @param size_h
-	 *            Horizontal size of the Times Table.
 	 */
-	public void setSize(int size_v, int size_h) {
-		this.size_x = size_h;
-		this.length_x = (int) Math.log10(size_h) + 1;
-		this.size_y = size_v;
-		this.length_y = (int) Math.log10(size_v) + 1;
-		this.length_z = (int) Math.log10(size_h * size_v) + 1;
+	public TimesTable() {
+		this.size_x = 4;
+		this.size_y = 4;
+		this.length_x = (int) Math.log10(this.size_x) + 1;
+		this.length_y = (int) Math.log10(this.size_y) + 1;
+		this.length_z = (int) Math.log10(this.size_x * this.size_y) + 1;
+		this.padding = false;
+		this.padChar = ' ';
 	}
 
-	// /**
-	// * Padding with space or not.
-	// *
-	// * @param padding
-	// */
-	// public void setPadding(boolean padding) {
-	// this.padding = padding;
-	// }
+	/**
+	 * Setting the size of Times Table.
+	 * 
+	 * @param size_v
+	 *            Vertical size of the Times Table, must larger than zero.
+	 * @param size_h
+	 *            Horizontal size of the Times Table, must larger than zero.
+	 */
+	public TimesTable(int size_v, int size_h) {
+		if (size_h < 1) {
+			this.size_x = 1;
+		} else {
+			this.size_x = size_h;
+		}
+		if (size_v < 1) {
+			this.size_y = 1;
+		} else {
+			this.size_y = size_v;
+		}
+		this.length_x = (int) Math.log10(this.size_x) + 1;
+		this.length_y = (int) Math.log10(this.size_y) + 1;
+		this.length_z = (int) Math.log10(this.size_x * this.size_y) + 1;
+		this.padding = false;
+		this.padChar = ' ';
+	}
+
+	/**
+	 * Setting the size of Times Table.
+	 * 
+	 * @param size_v
+	 *            Vertical size of the Times Table, must larger than zero.
+	 * @param size_h
+	 *            Horizontal size of the Times Table, must larger than zero.
+	 * @param padChar
+	 *            Character used for padding.
+	 */
+	public TimesTable(int size_v, int size_h, char padChar) {
+		if (size_h < 1) {
+			this.size_x = 1;
+		} else {
+			this.size_x = size_h;
+		}
+		if (size_v < 1) {
+			this.size_y = 1;
+		} else {
+			this.size_y = size_v;
+		}
+		this.length_x = (int) Math.log10(this.size_x) + 1;
+		this.length_y = (int) Math.log10(this.size_y) + 1;
+		this.length_z = (int) Math.log10(this.size_x * this.size_y) + 1;
+		this.padding = true;
+		this.padChar = padChar;
+	}
+
+	/**
+	 * Padding with space or not.
+	 * 
+	 * @param padding
+	 *            Whether padding or not.
+	 */
+	public void setPadding(boolean padding) {
+		this.padding = padding;
+		this.padChar = ' ';
+	}
+
+	/**
+	 * Padding with space or not.
+	 * 
+	 * @param padding
+	 *            Whether padding or not.
+	 * @param padChar
+	 *            Character used for padding.
+	 */
+	public void setPadding(boolean padding, char padChar) {
+		this.padding = padding;
+		this.padChar = padChar;
+	}
 
 	/**
 	 * Fill in correspond equation.
@@ -53,8 +126,13 @@ public class TimesTable {
 	public void fill(int pos_h, int pos_v) {
 		if (pos_h >= start_x && pos_h <= size_x && pos_v >= start_y && pos_v <= size_y) {
 			// Switch to printf for (a little) better performance
-			System.out.printf("%" + length_x + "d*%" + length_y + "d=%" + length_z + "d\t", pos_h, pos_v,
-					pos_h * pos_v);
+			if (padding) {
+				System.out.printf("%" + length_x + "d" + padChar + "*" + padChar + "%" + length_y + "d" + padChar + "="
+						+ padChar + "%" + length_z + "d\t", pos_h, pos_v, pos_h * pos_v);
+			} else {
+				System.out.printf("%" + length_x + "d*%" + length_y + "d=%" + length_z + "d\t", pos_h, pos_v,
+						pos_h * pos_v);
+			}
 		}
 	}
 

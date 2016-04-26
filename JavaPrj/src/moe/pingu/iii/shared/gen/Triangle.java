@@ -3,7 +3,7 @@ package moe.pingu.iii.shared.gen;
 /**
  * Generate triangle and print out. First used in Homework 1 and 2.
  * 
- * @version 1.0.2016.04.22
+ * @version 1.1.2016.04.26
  * @author PinGu
  *
  */
@@ -13,17 +13,17 @@ public class Triangle {
 	/**
 	 * Which character should be print out in main part.
 	 */
-	public char symbol = '*'; // symbol for solid part
+	private char symbol = '*'; // symbol for solid part
 
 	/**
 	 * When true, the output vertically mirrored.
 	 */
-	public boolean flip_v = false; // vertically flip
+	private boolean flip_v = false; // vertically flip
 
 	/**
 	 * Decide the line ending be print or not if the length is between 0 and 1.
 	 */
-	public boolean over_h = true; // fill the boundary
+	private boolean over_h = true; // fill the boundary
 
 	/**
 	 * Triangle's slope. Too buggy to use.
@@ -34,27 +34,171 @@ public class Triangle {
 	/**
 	 * How many line is the triangle.
 	 */
-	public int high = 6; // block size = (max_high/slope) * max_high / 2
+	private int high = 6; // block size = (max_high/slope) * max_high / 2
 
 	/**
 	 * Internal index, only used when line number not specified.
 	 */
-	protected int c_high = 1; // current step, 1 <= c_high <= max_high
+	private int c_high = 1; // current step, 1 <= c_high <= max_high
 
 	/**
 	 * Triangle for space-padding.
 	 */
-	protected Triangle fill = null;
+	private Triangle fill = null;
 
 	/**
 	 * Padding or not.
 	 */
-	protected boolean alt = false; // fill the other half
+	private boolean alt = false; // fill the other half
 
 	/**
 	 * When true, the output horizontally mirrored.
 	 */
-	protected boolean flip_h = false; // horizontally flip when alt=true
+	private boolean flip_h = false; // horizontally flip when alt=true
+
+	/**
+	 * Constructor for triangle pattern.
+	 */
+	public Triangle() {
+		this.high = 6;
+		this.symbol = '*';
+		this.flip_v = false;
+		this.over_h = true;
+	}
+
+	/**
+	 * Constructor for triangle pattern.
+	 * 
+	 * @param high
+	 *            Level of triangle, must larger than zero.
+	 */
+	public Triangle(int high) {
+		if (high < 1) {
+			this.high = 1;
+		} else {
+			this.high = high;
+		}
+		this.symbol = '*';
+		this.flip_v = false;
+		this.over_h = true;
+	}
+
+	/**
+	 * Constructor for triangle pattern.
+	 * 
+	 * @param high
+	 *            Level of triangle, must larger than zero.
+	 * @param flip_v
+	 *            When true, the output vertically mirrored.
+	 */
+	public Triangle(int high, boolean flip_v) {
+		if (high < 1) {
+			this.high = 1;
+		} else {
+			this.high = high;
+		}
+		this.symbol = '*';
+		this.flip_v = flip_v;
+		this.over_h = true;
+	}
+
+	/**
+	 * Constructor for triangle pattern.
+	 * 
+	 * @param high
+	 *            Level of triangle, must larger than zero.
+	 * @param symbol
+	 *            Character user for filling.
+	 */
+	public Triangle(int high, char symbol) {
+		if (high < 1) {
+			this.high = 1;
+		} else {
+			this.high = high;
+		}
+		this.symbol = symbol;
+		this.flip_v = false;
+		this.over_h = true;
+	}
+
+	/**
+	 * Constructor for triangle pattern.
+	 * 
+	 * @param high
+	 *            Level of triangle, must larger than zero.
+	 * @param symbol
+	 *            Character user for filling.
+	 * @param flip_v
+	 *            When true, the output vertically mirrored.
+	 */
+	public Triangle(int high, char symbol, boolean flip_v) {
+		if (high < 1) {
+			this.high = 1;
+		} else {
+			this.high = high;
+		}
+		this.symbol = symbol;
+		this.flip_v = flip_v;
+		this.over_h = true;
+	}
+
+	/**
+	 * Constructor for triangle pattern.
+	 * 
+	 * @param high
+	 *            Level of triangle, must larger than zero.
+	 * @param symbol
+	 *            Character user for filling.
+	 * @param flip_v
+	 *            When true, the output vertically mirrored.
+	 * @param fillOver
+	 *            Decide the line ending be print or not if the length is
+	 *            between 0 and 1.
+	 */
+	public Triangle(int high, char symbol, boolean flip_v, boolean fillOver) {
+		if (high < 1) {
+			this.high = 1;
+		} else {
+			this.high = high;
+		}
+		this.symbol = symbol;
+		this.flip_v = flip_v;
+		this.over_h = fillOver;
+	}
+
+	/**
+	 * Setup the space-padding triangle.
+	 * 
+	 * @param fillAuto
+	 *            Whether padding with alt char or not.
+	 */
+	public void setAlt(boolean fillAuto) {
+		alt = fillAuto;
+		flip_h = false;
+		if (fillAuto) {
+			fill = new Triangle(this.high, ' ', !this.flip_v, !this.over_h);
+		} else {
+			fill = null; // release it.
+		}
+	}
+
+	/**
+	 * Setup the space-padding triangle.
+	 * 
+	 * @param fillAuto
+	 *            Whether padding with alt char or not.
+	 * @param fillBefore
+	 *            Padding before the main triangle.
+	 */
+	public void setAlt(boolean fillAuto, boolean fillBefore) {
+		alt = fillAuto;
+		flip_h = fillBefore;
+		if (fillAuto) {
+			fill = new Triangle(this.high, ' ', !this.flip_v, !this.over_h);
+		} else {
+			fill = null; // release it.
+		}
+	}
 
 	/**
 	 * Setup the space-padding triangle.
@@ -70,12 +214,7 @@ public class Triangle {
 		alt = fillAuto;
 		flip_h = fillBefore;
 		if (fillAuto) {
-			fill = new Triangle();
-			fill.symbol = fillSymbol;
-			fill.flip_v = !this.flip_v;
-			fill.over_h = !this.over_h;
-			// fill.slope = this.slope;
-			fill.high = this.high;
+			fill = new Triangle(this.high, fillSymbol, !this.flip_v, !this.over_h);
 		} else {
 			fill = null; // release it.
 		}

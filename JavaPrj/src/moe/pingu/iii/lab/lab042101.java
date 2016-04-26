@@ -6,9 +6,8 @@ public class lab042101 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int iMax = 128, jMax = 9;
-		TimesTable obj = new TimesTable();
-		obj.setSize(iMax, jMax);
+		// int iMax = 128, jMax = 9;
+		TimesTable obj = new TimesTable(128, 9);
 		obj.fillAll();
 	}
 }

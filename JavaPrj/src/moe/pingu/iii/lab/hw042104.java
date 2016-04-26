@@ -10,14 +10,10 @@ public class hw042104 {
 		int repeat_h = 8, repeat_v = 20;
 		// int repeat_h = 1, repeat_v = 1;
 
-		Triangle objA = new Triangle(); // left part
-		objA.high = high;
-		objA.over_h = false;
+		Triangle objA = new Triangle(high, '*', false, false); // left part
 		objA.setAlt(true, true, '.');
 
-		Triangle objB = new Triangle(); // right part
-		objB.high = high;
-		objB.over_h = true;
+		Triangle objB = new Triangle(high, '*', false, true); // right part
 		objB.setAlt(true, false, '.');
 
 		for (int v = 1; v <= repeat_v; v++) {
