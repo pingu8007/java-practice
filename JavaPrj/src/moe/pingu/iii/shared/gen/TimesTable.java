@@ -28,13 +28,8 @@ public class TimesTable {
 	 * Setting the size of Times Table.
 	 */
 	public TimesTable() {
-		this.size_x = 4;
-		this.size_y = 4;
-		this.length_x = (int) Math.log10(this.size_x) + 1;
-		this.length_y = (int) Math.log10(this.size_y) + 1;
-		this.length_z = (int) Math.log10(this.size_x * this.size_y) + 1;
-		this.padding = false;
-		this.padChar = ' ';
+		this(4, 4, ' ');
+		setPadding(false, ' ');
 	}
 
 	/**
@@ -46,21 +41,8 @@ public class TimesTable {
 	 *            Horizontal size of the Times Table, must larger than zero.
 	 */
 	public TimesTable(int size_v, int size_h) {
-		if (size_h < 1) {
-			this.size_x = 1;
-		} else {
-			this.size_x = size_h;
-		}
-		if (size_v < 1) {
-			this.size_y = 1;
-		} else {
-			this.size_y = size_v;
-		}
-		this.length_x = (int) Math.log10(this.size_x) + 1;
-		this.length_y = (int) Math.log10(this.size_y) + 1;
-		this.length_z = (int) Math.log10(this.size_x * this.size_y) + 1;
-		this.padding = false;
-		this.padChar = ' ';
+		this(size_v, size_h, ' ');
+		setPadding(false, ' ');
 	}
 
 	/**
@@ -84,11 +66,14 @@ public class TimesTable {
 		} else {
 			this.size_y = size_v;
 		}
+		this.calcLength();
+		setPadding(true, padChar);
+	}
+
+	private void calcLength() {
 		this.length_x = (int) Math.log10(this.size_x) + 1;
 		this.length_y = (int) Math.log10(this.size_y) + 1;
 		this.length_z = (int) Math.log10(this.size_x * this.size_y) + 1;
-		this.padding = true;
-		this.padChar = padChar;
 	}
 
 	/**
@@ -98,8 +83,7 @@ public class TimesTable {
 	 *            Whether padding or not.
 	 */
 	public void setPadding(boolean padding) {
-		this.padding = padding;
-		this.padChar = ' ';
+		this.setPadding(padding, ' ');
 	}
 
 	/**

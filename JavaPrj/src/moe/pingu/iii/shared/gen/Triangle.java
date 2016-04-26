@@ -60,10 +60,7 @@ public class Triangle {
 	 * Constructor for triangle pattern.
 	 */
 	public Triangle() {
-		this.high = 6;
-		this.symbol = '*';
-		this.flip_v = false;
-		this.over_h = true;
+		this(6, '*', false, true);
 	}
 
 	/**
@@ -73,14 +70,7 @@ public class Triangle {
 	 *            Level of triangle, must larger than zero.
 	 */
 	public Triangle(int high) {
-		if (high < 1) {
-			this.high = 1;
-		} else {
-			this.high = high;
-		}
-		this.symbol = '*';
-		this.flip_v = false;
-		this.over_h = true;
+		this(high, '*', false, true);
 	}
 
 	/**
@@ -92,14 +82,7 @@ public class Triangle {
 	 *            When true, the output vertically mirrored.
 	 */
 	public Triangle(int high, boolean flip_v) {
-		if (high < 1) {
-			this.high = 1;
-		} else {
-			this.high = high;
-		}
-		this.symbol = '*';
-		this.flip_v = flip_v;
-		this.over_h = true;
+		this(high, '*', flip_v, true);
 	}
 
 	/**
@@ -111,14 +94,7 @@ public class Triangle {
 	 *            Character user for filling.
 	 */
 	public Triangle(int high, char symbol) {
-		if (high < 1) {
-			this.high = 1;
-		} else {
-			this.high = high;
-		}
-		this.symbol = symbol;
-		this.flip_v = false;
-		this.over_h = true;
+		this(high, symbol, false, true);
 	}
 
 	/**
@@ -132,14 +108,7 @@ public class Triangle {
 	 *            When true, the output vertically mirrored.
 	 */
 	public Triangle(int high, char symbol, boolean flip_v) {
-		if (high < 1) {
-			this.high = 1;
-		} else {
-			this.high = high;
-		}
-		this.symbol = symbol;
-		this.flip_v = flip_v;
-		this.over_h = true;
+		this(high, symbol, flip_v, true);
 	}
 
 	/**
@@ -173,13 +142,7 @@ public class Triangle {
 	 *            Whether padding with alt char or not.
 	 */
 	public void setAlt(boolean fillAuto) {
-		alt = fillAuto;
-		flip_h = false;
-		if (fillAuto) {
-			fill = new Triangle(this.high, ' ', !this.flip_v, !this.over_h);
-		} else {
-			fill = null; // release it.
-		}
+		this.setAlt(fillAuto, false, ' ');
 	}
 
 	/**
@@ -191,13 +154,7 @@ public class Triangle {
 	 *            Padding before the main triangle.
 	 */
 	public void setAlt(boolean fillAuto, boolean fillBefore) {
-		alt = fillAuto;
-		flip_h = fillBefore;
-		if (fillAuto) {
-			fill = new Triangle(this.high, ' ', !this.flip_v, !this.over_h);
-		} else {
-			fill = null; // release it.
-		}
+		this.setAlt(fillAuto, fillBefore, ' ');
 	}
 
 	/**
