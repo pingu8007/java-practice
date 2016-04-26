@@ -2,8 +2,8 @@ package moe.pingu.iii.shared.gen;
 
 public class TimesTable {
 
-	private char padChar = ' ';
-	private boolean padding = true;
+	// private char padChar = ' ';
+	// private boolean padding = true;
 
 	private int size_x = 1;
 	private int size_y = 1;
@@ -16,30 +16,6 @@ public class TimesTable {
 	private int length_x = 1;
 	private int length_y = 1;
 	private int length_z = 1;
-
-	public static void main(String[] args) {
-		TimesTable obj = new TimesTable();
-		obj.setSize(10, 20);
-		obj.setPadding(true);
-
-//		obj.fill(10, 20);
-//		System.out.print('\n');
-//
-//		obj.fillNext();
-//		System.out.print('\n');
-//		obj.fillNext();
-//		System.out.print('\n');
-//		obj.fillNext();
-//		System.out.print('\n');
-//		System.out.print('\n');
-//
-//		obj.fillLine(1);
-
-		obj.fillAll();
-
-//		obj.setPadding(false);
-//		obj.fillAll();
-	}
 
 	/**
 	 * Setting the size of Times Table.
@@ -57,14 +33,14 @@ public class TimesTable {
 		this.length_z = (int) Math.log10(size_h * size_v) + 1;
 	}
 
-	/**
-	 * Padding with space or not.
-	 * 
-	 * @param padding
-	 */
-	public void setPadding(boolean padding) {
-		this.padding = padding;
-	}
+//	/**
+//	 * Padding with space or not.
+//	 * 
+//	 * @param padding
+//	 */
+//	public void setPadding(boolean padding) {
+//		this.padding = padding;
+//	}
 
 	/**
 	 * Fill in correspond equation.
@@ -76,40 +52,8 @@ public class TimesTable {
 	 */
 	public void fill(int pos_h, int pos_v) {
 		if (pos_h >= start_x && pos_h <= size_x && pos_v >= start_y && pos_v <= size_y) {
-
-			for (int j = length_y - (int) Math.log10(pos_v) - 1; j > 0; j--) {
-				System.out.print(padChar);
-			}
-			System.out.print(pos_v);
-			if (padding) {
-				System.out.print(" ");
-			}
-
-			System.out.print("*");
-			if (padding) {
-				System.out.print(" ");
-			}
-
-			for (int i = length_x - (int) Math.log10(pos_h) - 1; i > 0; i--) {
-				System.out.print(padChar);
-			}
-			System.out.print(pos_h);
-			if (padding) {
-				System.out.print(" ");
-			}
-
-			System.out.print("=");
-			if (padding) {
-				System.out.print(" ");
-			}
-
-			for (int k = length_z - (int) Math.log10(pos_h * pos_v) - 1; k > 0; k--) {
-				System.out.print(padChar);
-			}
-			System.out.print(pos_h * pos_v);
-			if (padding) {
-				System.out.print("\t");
-			}
+			//Switch to printf for (a little) better performance
+			System.out.printf("%" + length_y + "d*%" + length_x + "d=%" + length_z + "d\t", pos_v, pos_h, pos_h * pos_v);
 		}
 	}
 
