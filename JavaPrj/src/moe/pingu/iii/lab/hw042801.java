@@ -18,11 +18,19 @@ import moe.pingu.iii.shared.Calc;
 
 public class hw042801 {
 
-	public static void main2(String[] args) {
-		// TODO Auto-generated method stub
-		// Calc.debug = true;
-		int[][] count;
+	public static void main(String[] args) {
+		v2();
+		// v1();
+	}
 
+	/**
+	 * 2-D array version of Lottery statistics.
+	 */
+	public static void v2() {
+		// Array.setDebug(true);
+
+		// Generating
+		int[][] count;
 		count = new int[42][2];
 		for (int i = 0; i < 42; i++) {
 			count[i][1] = i + 1;
@@ -31,15 +39,17 @@ public class hw042801 {
 			count[Calc.random(1, 42) - 1][0]++;
 		}
 
+		// Printing-original
 		System.out.println("num\tcount    <--original");
 		System.out.println("---\t-----");
 		for (int i = 0; i < 42; i++) {
 			System.out.println(count[i][1] + "\t" + count[i][0]);
 		}
 
+		// Sorting
 		count = Array.arrayBidirectionalBubbleSort(count);
 
-		// Calc.arrayPrint(count);
+		// Printing-sorted
 		System.out.println("num\tcount    <--sorted");
 		System.out.println("---\t-----");
 		for (int i = 0; i < 42; i++) {
@@ -47,14 +57,13 @@ public class hw042801 {
 		}
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// Calc.debug = true;
-		int[] count, index;
+	/**
+	 * 1-D array version of Lottery statistics.
+	 */
+	public static void v1() {
 
 		// Generating
-		count = new int[42];
-		index = new int[42];
+		int[] count = new int[42], index = new int[42];
 		for (int i = 0; i < 42; i++) {
 			index[i] = i + 1;
 		}
@@ -108,5 +117,4 @@ public class hw042801 {
 			System.out.println(index[i] + "\t" + count[i]);
 		}
 	}
-
 }

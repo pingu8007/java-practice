@@ -1,5 +1,7 @@
 package moe.pingu.iii.shared;
 
+import java.math.BigInteger;
+
 public class Calc {
 
 	@SuppressWarnings("unused")
@@ -48,6 +50,31 @@ public class Calc {
 			long[] tmp = fibonacci2(e - 1);
 			r[0] = tmp[1];
 			r[1] = tmp[0] + tmp[1];
+		}
+		return r;
+	}
+
+	/**
+	 * Calculate the value of x in fibonacci series. Mixed recursive implement.
+	 * 
+	 * @param e
+	 *            number from +0~+any
+	 * @return number pair. The first one is the value of e-1, and the second
+	 *         one is the value of e.
+	 */
+	public static BigInteger[] fibonacci2(BigInteger e) {
+		BigInteger[] r = { null, null };
+
+		if (e.compareTo(new BigInteger("0")) <= 0) {
+			r[0] = new BigInteger("0");
+			r[1] = new BigInteger("0");
+		} else if (e.compareTo(new BigInteger("1")) == 0) {
+			r[0] = new BigInteger("0");
+			r[1] = new BigInteger("1");
+		} else {
+			BigInteger[] tmp = fibonacci2(e.subtract(new BigInteger("1")));
+			r[0] = tmp[1];
+			r[1] = tmp[0].add(tmp[1]);
 		}
 		return r;
 	}
