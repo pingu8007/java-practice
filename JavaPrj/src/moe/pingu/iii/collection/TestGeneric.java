@@ -1,6 +1,7 @@
 package moe.pingu.iii.collection;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 class Tester<T> {
@@ -22,12 +23,27 @@ public class TestGeneric {
 
 		Tester<Integer> i1 = new Tester<Integer>();
 		i1.setValue(20);
-		System.out.println(i1.getValue());
+		// System.out.println(i1.getValue());
 
-		LinkedList<Hashtable<String, String>> l1 = new LinkedList<Hashtable<String, String>>();
-		Hashtable<String, String> p1 = new Hashtable<String, String>();
-		p1.put("x", "22");
-		l1.add(p1);
+		LinkedList<Hashtable<String, Integer>> l1 = new LinkedList<Hashtable<String, Integer>>();
+		for (int i = 0; i <= 16; i++) {
+			Hashtable<String, Integer> p = new Hashtable<String, Integer>();
+			p.put("x", i);
+			p.put("y", i * i);
+			l1.add(p);
+//			l1.offer(p);
+		}
+
+		// method A
+		Iterator<Hashtable<String, Integer>> catcher = l1.iterator();
+		while (catcher.hasNext()) {
+			System.out.println(catcher.next().get("y"));
+		}
+
+		// method B
+		for (Hashtable<String, Integer> p : l1) {
+			// System.out.println(p.get("y"));
+		}
 	}
 
 }
